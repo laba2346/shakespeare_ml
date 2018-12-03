@@ -36,17 +36,51 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-                <div>
-                        Result: {% for message in get_flashed_messages() %}
-                            {% if message %}
-                            <div class="alert alert-danger" style="margin-top:10px" role="alert">
-                                {{ message }}
-                            </div>
-                            {% endif %}
-                        {% endfor %}
+                {% if response %}
+                <div class="shadow p-3 mb-5 bg-white rounded">
+                    <h1 class="display-4">Result</h1>
+                        <p>
+                            I am {{ response.probability }}% certain that the quote
+                        </p>
+                        <p>
+
+                        <blockquote class="blockquote">
+                          <p class="mb-0">"{{response.quote}}"</p>
+                        </blockquote>
+                        </p>
+                        <p>
+                            {% if response.isShakespeare %}
+                            is indeed Shakespeare (or Shakespeare-like)
+                            {% else %}
+                            is <strong>not</strong> Shakespearean.
+                            {% endif %}<br />
+                        </p>
+
+
+
+                </div>
+                {% endif %}
+                <div class="shadow p-3 mb-5 bg-white rounded">
+                    <h1 class="display-4">Motivation</h1>
+                    <p>
+                        As a non-major coming into this class, I was a bit unsure how well I could read Shakespeare.
+                        It did not take long for me to realize that comprehending the text was going to be a challenge. This was surprising to me given some of the
+                        materials that we reviewed at the start of the semester, including the "You're quoting Shakespeare" video, as seen below.
+                    </p>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/Ig6f5fT0Xho" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <p>
+                        From the sounds of it, modern day English is heavily influenced by Shakespeare's works. What makes it seem so different, then, beyond iambic pentameter?
+                        This question motivated me to explore Shakespeare's English further and how it compares to modern texts.
+                    </p>
+                    <p>
+                        In addition to contemplating these differences, I wanted to apply Shakespeare to my major. Machine learning is a
+                        booming field in Computer Science and is being used more and more everyday. Google and Apple use machine learning,
+                        for example, to determine what animals or things are in your photos, allowing you to search your personal photos for
+                        pictures of your dog. I wanted to see how these concepts could be applied to an English class.
+                    </p>
                 </div>
             </div>
-            <footer class="text-muted">
+            <footer style="margin-bottom:20px" class="text-muted">
                 ENGL 3000 Creative Project Fall 2018
             </footer>
         </div>

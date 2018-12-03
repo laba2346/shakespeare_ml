@@ -5,6 +5,18 @@ from tensorflow import keras
 from .forms import QuoteForm
 from keras import backend as K
 
+class Prediction:
+    def __init__(self, quote, probability):
+        self.quote = quote
+        prob = probability[0][0]
+        if(float(prob) > 0.5):
+            print("is shakespeare")
+            self.isShakespeare = True
+            self.probability = prob*100
+
+        else:
+            self.isShakespeare = False
+            self.probability = (1-prob)*100
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -12,9 +24,9 @@ def index():
     form = QuoteForm()
 
     if form.validate_on_submit():
-        predict(form.quote.data)
-        return redirect(url_for('index'))
-    return render_template('index.html', form=form)
+        response = predict(form.quote.data)
+        return render_template('index.html', form=form, response=response)
+    return render_template('index.html', form=form, response=None)
 
 @app.route('/predict')
 def predict(string):
@@ -23,4 +35,6 @@ def predict(string):
                                                         padding='post',
                                                         maxlen=20)
     with graph.as_default():
-        flash(str(model.predict(quote,verbose=1)))
+        probability = model.predict(quote,verbose=1)
+
+    return Prediction(string, probability)
