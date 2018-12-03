@@ -36,6 +36,15 @@
                         {% endif %}
                     {% endfor %}
                 </div>
+                <div>
+                        Result: {% for message in get_flashed_messages() %}
+                            {% if message %}
+                            <div class="alert alert-danger" style="margin-top:10px" role="alert">
+                                {{ message }}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                </div>
             </div>
             <footer class="text-muted">
                 ENGL 3000 Creative Project Fall 2018
